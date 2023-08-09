@@ -1,0 +1,140 @@
+#allCheckP{
+	font-family: 'GmarketSansMedium';
+	/*margin-left:20px;
+	margin-top:10px;*/
+}
+#allCheckR{
+	margin-left:10px;
+}
+#allCheckR{
+	border-radius:50px;
+	border:1px solid gray;
+	appearance: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    width:12px;
+    height:12px;
+}
+#allCheckR:checked{
+	background:#2C394B;
+	border:none;
+}
+#noRList{
+	margin-left:10px;
+}
+#noRList{
+	border-radius:50px;
+	border:1px solid gray;
+	appearance: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    width:12px;
+    height:12px;
+}
+#noRList:checked{
+	background:#2C394B;
+	border:none;
+}
+#bold2{
+	font-weight:bold;
+}
+.reviewTitle{
+	width:100%;
+	font-size:32px;
+	margin-top:25px;
+	margin-left:46px;
+	margin-bottom:10px;
+}
+.reviewList li{
+	float:left;
+	width:11%;
+	height:40px;
+	line-height:40px;
+	border-bottom:1px solid #ddd;
+}
+.reviewList li:nth-child(6n+3){
+	width:40%;
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis;
+}
+.reviewList li:nth-child(6n-5){
+	margin-left:25px;
+}
+#reviewChange:hover{
+	background:#F37321;
+}
+#reviewChange{
+	line-height:20px;
+	background: #2C394B;
+	color:white;
+	height: 30px;
+	border: none;
+	border-radius:5px;
+}
+#reviewDelete:hover{
+	background:#F37321;
+}
+#reviewDelete{
+	line-height:20px;
+	background: #2C394B;
+	color:white;
+	height: 30px;
+	border: none;
+	border-radius:5px;
+}
+#chooseDelR:hover{
+	background:#F37321;
+}
+#chooseDelR{
+	margin-left:30px;
+	margin-top:10px;
+}
+.pagingDivR{
+	width:20%;
+	margin:0 auto;
+}
+.pagingDivR li{
+	float:left;
+	padding:10px 20px;
+}
+#chooseDelR{
+	font-family: 'GmarketSansMedium';
+	width: 100px;
+	margin-left:46px;
+	color:white;
+	height: 40px;
+	border: none;
+	background: #2C394B;
+	border-radius:5px;
+	padding-top:5px;
+}
+.content_s{
+	font-family: 'GmarketSansMedium';
+}
+.fa-bookmark{
+	color:#2747a1;
+	margin:0;
+	font-size:20px;
+}
+.reviewList{
+	text-align:center;
+	width:96%;
+	margin:auto;
+	/*border-top:1px solid gray;*/
+	box-shadow:0px 0px 4px gray;
+}
+.weight_800{
+	font-weight:800;
+}
+.mypageReview_select{
+	float:left;
+    margin-top: 14px;
+    margin-left: 29px;
+}
+.review_Num_css{
+	text-align:left;
+}
+.review_subject_css{
+	text-align:left;
+}

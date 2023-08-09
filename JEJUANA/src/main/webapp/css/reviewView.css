@@ -1,0 +1,151 @@
+header{
+	display:none;
+}
+.section {
+	display: flex;
+	width: 100%;
+	background: white;
+	height: 140%;
+	margin-bottom: 80px;
+}
+
+.category1 button {
+	width: 10%;
+	height: 50%;
+	letter-spacing: 2px;
+	margin-top: 50px
+}
+
+.category2 button {
+	width: 100%;
+	height: 50px;
+}
+
+.category2_1 {
+	color: white;
+	background: darkgray;
+	border: outset;
+}
+
+.category1 {
+	font-size: 40px;
+	font-weight: bold;
+	font-family: 'GmarketSansMedium';
+	background: url(../img/commonmanager1.png);
+	height: 263px;
+}
+.category1>div {
+	display: inline-block;
+	font-size: 28px;
+	font-weight: bold;
+	margin: 2%;
+}
+.category1 p {
+    font-size: 16px;
+    color: gray;
+    font-weight: 100;
+}
+.screen {
+	font-family: 'GmarketSansMedium';
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+
+.section1 {
+	width: 11%;
+	background:#e9e9e9;
+}
+.commonmangerLink:hover{
+	color:black;
+
+}
+.commonmangerLink{
+	color:black;
+	text-decoration: none;
+}
+.section1_1 {
+	background: white;
+	height: 12.6%;
+}
+
+.section1_1_1 {
+	font-family: 'GmarketSansMedium';
+}
+
+.section1_1_2 {
+	width: 130px;
+	height: 70px;
+	margin-top: 15%;
+	margin-left: 23%;
+}
+
+.section2 {
+	width: 90%;
+}
+
+.category2 button {
+    width: 100%;
+    height: 50px;
+    background: #080232;
+    border-bottom: 1px solid white;
+}
+
+.category2_1 {
+	color: white;
+	border: none;
+}
+
+.section2_1_1 {
+	margin-left: 4%;
+}
+
+#st {
+	font-family: 'GmarketSansMedium';
+}
+
+.tsearch {
+	margin-left: 4%;
+}
+
+.section1_1_1 {
+	transform: translate(0, 100%);
+	text-align: center;
+}
+
+.section2_1_2 {
+	transform: translate(0, 24%);
+	font-size: 35px;
+}
+.viewBox{
+	padding: 30px;	
+}
+#upList{
+	width:100%;
+}
+#view{
+	box-shadow: 0px 0px 4px gray;
+	padding:15px;
+}
+
+#view li {
+	border-bottom: 1px solid #ddd;
+	padding: 10px 0;
+}
+
+.titleView {
+	font-size: 35px;
+	padding-top: 50px;
+	padding-bottom: 20px;
+}
+
+.container {
+	margin-left: 10px;
+	margin-bottom: 50px;
+}
+
+#img1 {
+	font-size: 60px;
+    margin-top: 15%;
+    margin-left: 36%;
+}

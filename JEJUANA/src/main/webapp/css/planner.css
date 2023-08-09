@@ -1,0 +1,508 @@
+ul{
+    padding: 0;
+    margin: 10px 20px;
+}
+ul li{
+    list-style-type: none;
+    margin: 2px;
+    padding: 3px;
+    width: 100%;
+    height: available;
+}
+#planner_body, #map {
+    float: left;
+    position: absolute;
+    height: 100%
+}
+#planner_body {
+    font-family: 'GmarketSansMedium';
+    width: 439px;
+    padding: 10px;
+    margin: auto;
+}
+#planner_body>ul{
+    height:100%;
+}
+#map {
+    top: 0;
+    left: 439px;
+    width: 77%;
+}
+.header, footer {
+    display: none;
+
+}
+
+#schedule {
+    width: 100%;
+    /* height: 86.4%; */
+    max-height: 740px;
+    background-color: #f1f1f1;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    position: absolute;
+    bottom: 46px;
+    top: 130px;
+}
+
+#schedule::-webkit-scrollbar{
+    display: none!important;
+}
+
+#transport_radio {
+    border: 1px solid #232020;
+
+}
+
+.label, .content {
+    float: left;
+}
+
+.label {
+    width: 25%;
+    height: 100%;
+    padding-top:4px;
+}
+
+.ib {
+    width: 65%;
+    font-size:14px;
+}
+
+.content {
+
+    height: 80px;
+    overflow-y: auto;
+    background-color: white;
+}
+
+.day {
+    width: 50px;
+    height : 30px;
+    line-height: 30px;
+    border-radius: 5px;
+    border-bottom: 3px solid;
+    background-color: azure;
+    color:#061733;
+    text-align: center;
+}
+
+#buttons {
+    display: -webkit-inline-box;
+}
+
+#myModal {
+    width: 400px;
+    height: 100%;
+    left: 439px;
+    top: 0;
+    position: absolute;
+    display: none;
+    z-index: 3;
+    background-color: #f9f9f9;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-left:1px solid gray
+
+}
+#modalheader{
+    width: 100%;
+    height: 40px;
+    display: flex;
+    margin-top: 5px;
+    justify-content: flex-start;
+}
+#place_tab:hover{
+    cursor:pointer;
+}
+#bookmark_tab:hover{
+    cursor:pointer;
+}
+#place_tab, #bookmark_tab{
+    margin: 0 5px;
+    width: 45%;
+    height: 40px;
+    line-height: 40px;
+    background-color: #9b9b9b;
+    text-align: center;
+    border-radius: 6px;
+    color: white;
+}
+#modalbody {
+    width: 100%;
+    height: 90%;
+
+}
+#modalfooter {
+    display: flex;
+    flex-direction: row-reverse;
+    padding: 0 10px;
+    height: 40px;
+    padding-top: 5px;
+}
+
+.schedule_detail {
+    margin: 5px;
+    padding: 5px;
+    border: 2px solid gray;
+    border-radius: 5px;
+    width: 95%;
+
+}
+
+.schedule_footer, .schedule_header {
+    height: 30px;
+
+}
+.placeAdd:hover{
+    color: #F37321;
+}
+.placeAdd {
+    position: relative;
+    left: 280px;
+    width: 100px;
+    font-size:14px;
+    margin-top:30px;
+}
+
+#xbox {
+    position: absolute;
+    left: 383px;
+    top: -1px;
+    padding: 0;
+    border: none;
+}
+#placeSave{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 5px;
+}
+
+.place_container {
+    display: grid;
+    background: #ffffff;
+    grid-template-columns: 90px auto 90px 60px;
+    grid-template-rows: 40px 40px;
+    padding: 5px;
+    margin: 3px auto;
+    grid-gap: 3px;
+    border-radius: 20px;
+}
+
+.place_item:nth-child(1) { /*사진*/
+    grid-column: 1/2;
+    grid-row: 1/span 2;
+}
+.place_item:nth-child(2) {/*이름*/
+    grid-column: 2/span 2;
+    grid-row: 1/2;
+}
+.place_item:nth-child(3) {/*설명*/
+    grid-column: 2/3;
+    grid-row: 2/3;
+}
+.place_item:nth-child(4) { /*별점*/
+    grid-column: 3/4;
+    grid-row: 2/3;
+}
+.place_item:nth-child(5) {/*버튼*/
+    grid-column: 4/5;
+    grid-row: 1/span 2;
+    align-items: center;
+}
+
+.star{
+    margin-right: 15px;
+}
+
+
+
+.place_item {
+    display: flex;
+    vertical-align: middle;
+    align-items: center;
+}
+
+
+#searchWord {
+    margin: 3px 0px;
+    width: 98%;
+    height: 90%;
+    margin-top:5px;
+}
+
+#placeBox {
+    height: 80%;
+    padding: 5px;
+    justify-content: center;
+    width: 100%;
+    -ms-overflow-style: none; /* 익스플로러, 앳지 */
+    scrollbar-width: none; /* 파이어폭스 */
+    overflow-y: auto;
+}
+
+#placeBox::-webkit-scrollbar {
+    display: none !important; /* 크롬, 사파리, 오페라 */
+}
+
+#selectedPlace {
+    /*background-color: rgba(217, 217, 217, 0.2);*/
+    height: 110px;
+    overflow: scroll;
+    border-bottom: 1px solid gray;
+    margin-top: 5px;
+    border-top: 1px solid gray;
+    background-color: #ededed;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+#selectedPlace .selected_place_item{
+    margin:5px 10px;
+    float: left;
+
+}
+#saveBtn:hover{
+    background:#F37321;
+}
+#saveBtn{
+    background-color: #082032;
+    color:white;
+    padding-right : 181px;
+    padding-left : 181px;
+    padding-top: 4px;
+    padding-bottom :3px;
+}
+.place{
+    display: grid;
+    grid-template-columns: 2fr 8fr 1.5fr;
+    grid-row-gap: 10px;
+    height:50px;
+    margin: 5px 0;
+
+
+}
+.place_name{
+    border: 1px solid dimgray;
+    /*border-radius: 10px;*/
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 40px;
+    padding-left: 10px;
+    margin: 10px;
+}
+.place_dis{
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #061733;
+    color: #f9f9f9;
+    text-align: center;
+    line-height: 25px;
+
+}
+.place_dis{
+    align-self: start;
+    background-color: #51b4ff;
+}
+.place_del{
+    align-self: center;
+    /*background-color: chocolate;*/
+    text-align: center;
+    border: none;
+}
+.course_order{
+    display: none;
+}
+.modal-content div[class=modal-body]{
+    margin: 0 auto;
+    align-content: center;
+
+}
+.modal-dialog{
+    vertical-align: middle;
+}
+#chooseModal{
+    z-index: 1051;
+}
+
+#planList{
+    width: 500px;
+    /* height: 700px; */
+    display: none;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    top: 0;
+    background-color: #082032;
+    z-index: 1052;
+    padding: 20px;
+    bottom: 20px;
+    border-radius: 20px;
+}
+#planListBody{
+    border-radius: 20px;
+    padding: 20px;
+    background-color: #fff;
+    min-height: 500px;
+
+}
+.plan_container{
+    display: grid;
+    grid-template-columns: 8fr 2fr;
+    grid-template-rows: 1fr 1fr;
+    grid-row-gap: 10px;
+    color : black;
+    background-color: white;
+    margin-bottom: 10px;
+}
+.plan_item:last-child{
+    grid-column: 2;
+    grid-row: 1/span 2;
+    align-items: center;
+    background-color: #51b4ff;
+    align-self: center;
+    text-align: center;
+}
+/*addCss*/
+.modal-content{
+    font-family: 'GmarketSansMedium';
+}
+#newPlannerChoose:hover{
+    background:#F37321;
+}
+#oldPlannerChoose:hover{
+    background:#F37321;
+}
+#newPlannerChoose,#oldPlannerChoose{
+    margin-top: 6px;
+    border: none;
+    background: #082032;
+    padding:10px;
+    color: white;
+}
+#newPlannerChoose{
+    padding-left:20px;
+    padding-right:20px;
+}
+#start_date, #end_date{
+    font-size: 13px;
+    border: 1px solid gray;
+    padding: 3px;
+}
+#total_schedule:hover{
+    background:#F37321;
+}
+#total_schedule{
+    border: none;
+    background: #082032;
+    padding:10px;
+    color: white;
+    text-align: center;
+}
+#xbox{
+    background-color: transparent;
+}
+#planner_body>ul{
+    position:relative;
+    margin:0;
+}
+.planner_bodyBtn{
+    position: absolute;
+    bottom: -6px;
+    text-align:center;
+}
+#save:hover{
+    background:#F37321;
+}
+#save{
+    border: none;
+    background: #082032;
+    padding:10px;
+    color: white;
+    width: 180px;
+}
+#cancel:hover{
+    background:#F37321;
+}
+#cancel{
+    border: none;
+    background: #082032;
+    padding:10px;
+    color: white;
+    width: 180px;
+    margin-left: 13px;
+}
+#container_A{
+    overflow:hidden;
+}
+.selected_place_item{
+    position: relative;
+}
+.selected_place_name{
+    display: none;
+    color : white;
+    background-color: #2C394B;
+    opacity: 0.9;
+    top:0;
+    left: 0;
+    right:0;
+    position: absolute;
+    height:25px;
+    text-align: center;
+    line-height: 25px;
+    overflow: hidden;
+}
+.delete{
+    display: none;
+}
+
+.selected_delete{
+    position: absolute;
+    top:-6px;
+    right:-6px;
+}
+#selectedPlace::-webkit-scrollbar {
+    display: none !important; /* 크롬, 사파리, 오페라 */
+}
+.fa-square-xmark{
+    font-size: 20px;
+    color: gray;
+}
+#searchWord:focus {
+    outline:none;
+}
+#searchForm{
+    text-align:center;
+}
+.btn-primary:hover{
+    background:#082032;
+}
+.btn-primary{
+    background: #9b9b9b;
+    border: none;
+    width: 60px;
+    height: 40px;
+    color: white;
+}
+#modalfooter{
+    display:none;
+}
+
+#gohome{
+    position: absolute;
+    top : 15px;
+    right : 15px;
+    z-index: 100;
+    background-color: white;
+    border-radius: 10px;
+    border : none;
+    width: 120px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+}
+.place_img{
+    box-shadow : 0 0 4px gray;
+}
+#place_tab:hover, #bookmark_tab:hover{
+    background-color:#F37321;
+}

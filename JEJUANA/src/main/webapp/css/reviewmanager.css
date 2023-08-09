@@ -1,0 +1,309 @@
+header {
+	display: none;
+}
+.section {
+	display: flex;
+	width: 100%;
+	background: white;
+	height: 100%;
+}
+#upList{
+	width:98%
+}
+.category1 {
+	font-size: 40px;
+	font-weight: bold;
+	font-family: 'GmarketSansMedium';
+	background: url(../img/commonmanager1.png);
+	height: 239px;
+}
+
+.category1>div {
+	display: inline-block;
+	font-size: 28px;
+	font-weight: bold;
+	margin: 2%;
+}
+
+.category2 button {
+    width: 100%;
+    height: 50px;
+    background: #080232;
+    border-bottom: 1px solid white;
+}
+
+.category2_1 {
+	color: white;
+	border: none;
+}
+
+.searchselect li {
+	list-style-type: none;
+	float: left;
+}
+
+.searchselect li a {
+	text-decoration: none;
+}
+
+table {
+	border: none;
+	border-collapse: collapse;
+	border-collapse: collapse;
+	text-align: center;
+	width: 90%;
+}
+
+table tr {
+	height: 60px;
+}
+
+#img1 {
+	font-size: 60px;
+    margin-top: 12%;
+    margin-left: 36%;
+}
+.st_1 {
+	height: 40px;
+	border-top: 1px solid #918888;
+	border-bottom: 1px solid #918888;
+	font-size: 20px;
+	padding-top:10px;
+	font-weight: 800;
+}
+.st_1>div{
+	/*border-right:1px solid gray;*/
+}
+.st_1>div:first-child,.st_2>div:first-child {
+	width: 3%;
+}
+
+.st_1>div:nth-child(2), .st_2>div:nth-child(2) {
+	width: 5%;
+}
+
+.st_1>div:nth-child(3), .st_2>div:nth-child(3) {
+	width: 30%;
+}
+
+.st_1>div:nth-child(4), .st_2>div:nth-child(4) {
+	width: 10%;
+}
+
+.st_1>div:nth-child(5) {
+	width: 10%;
+}
+.st_2>div:nth-child(5){
+	width:10.5%;
+}
+.st_1>div:nth-child(6), .st_2>div:nth-child(6) {
+	width: 13%;
+}
+.st_1>div:nth-child(7){
+	width: 16%;
+}
+.st_2>div:nth-child(7){
+	width:16%;
+}
+.st_1>div:nth-child(8), .st_2>div:nth-child(8) {
+	width: 10%;
+}
+
+.st_2_1 a {
+	text-decoration: none;
+	color: black;
+}
+
+.screen {
+	font-family: 'GmarketSansMedium';
+	width: 100%;
+	height: 100%;
+	position: absolute;
+}
+
+
+.st_1>div{
+	display:inline-block;
+	text-align:center;
+}
+
+.st_2 {
+	border-bottom: 1px solid #e7e0e0;
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+.st_2>div{
+	display:inline-block;
+	text-align:center;
+}
+
+.section1 {
+	width: 10%;
+	background: #e9e9e9;
+}
+
+.section1_1 {
+	background: white;
+	height: 15%;
+}
+
+.section1_1_1 {
+    transform: translate(0, 100%);
+    text-align: center;
+    margin-top: 1%;
+}
+
+.section1_1_2 {
+	width: 130px;
+	height: 70px;
+	margin-top: 15%;
+	margin-left: 23%;
+}
+
+.section2 {
+	width: 90%;
+	margin-bottom: 15%;
+}
+
+.section2_1 {
+	height: 20%;
+	margin-bottom: 4%
+}
+
+.section2_1_1 {
+	font-family: 'GmarketSansMedium';
+	display:inline-block;
+}
+
+.section2_2 {
+	display: flex;
+	height: 10%;
+	width: 90%;
+	margin: 20px;
+	margin-left: 10%
+}
+
+.section2_3 {
+	width: 10%;
+}
+
+.section2_4 {
+	width: 100%;
+	margin-top: 10px;
+	display: inline-flex;
+}
+
+.tsearch {
+	margin-left: 22px
+}
+
+.section2_5 {
+    width: 8%;
+    height: 49%;
+    background: #082032;
+    color: white;
+    border: none;
+    margin-bottom:1px
+}
+
+.section2_6 {
+	height: 45%;
+	margin-top: 40px;
+}
+
+.section2_7 {
+	margin-left: 3%;
+	width: 100%;
+}
+
+#searchForm {
+	width: 80%;
+    margin-left: 60px;
+}
+
+#searchKey {
+	height: 50%;
+	margin: 0px 0px 0 0px;
+	width: 12%;
+	margin-left: 10px;
+}
+
+#searchWord {
+	height: 50%;
+	width: 60%;
+}
+
+.tsearch {
+	margin-left: 22px
+}
+
+.section3 {
+	height: 45%;
+	margin-top: 40px;
+}
+
+.section3_1 a {
+	color: gray;
+}
+
+.section3_1 {
+	letter-spacing: 25px;
+	margin-left: 49%;
+	margin-top: 2%;
+}
+
+.section2_3_1 {
+	transform: translate(0, 164%);
+	text-align: center;
+}
+
+.scection4 {
+	float: right;
+	margin-top: 7px;
+	margin-right: 50px;
+}
+
+#st {
+	font-family: 'GmarketSansMedium';
+}
+
+#st td {
+	padding: 20px
+}
+
+.tsearch {
+	/*margin-left: 4%;*/
+}
+
+.category1 p {
+	font-size: 16px;
+	color: gray;
+	font-weight: 100;
+}
+
+.section1_1_1 {
+	transform: translate(0, 100%);
+	text-align: center;
+}
+
+.section2_1_2 {
+	transform: translate(0, 350%);
+	font-size: 35px;
+}
+
+#aupdate {
+	width: 110%;
+	height: 40px;
+	margin-top: -20%;
+	background: #082032;
+	color: white;
+	border:none;
+}
+
+#aupdate:hover {
+	background-color: #4e5458;
+}
+
+.category2 button:hover {
+	background-color: #4e5458;
+}

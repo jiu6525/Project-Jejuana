@@ -1,0 +1,173 @@
+.planTitle{
+	font-family: 'GmarketSansMedium';
+	width:100%;
+	/*border:1px solid navy;*/
+	font-size:32px;
+	margin-top:25px;
+	margin-left:65px;
+	margin-bottom:10px;
+	/*padding:10px;*/
+	/*text-align:center;*/
+}
+#allCheckP{
+	font-family: 'GmarketSansMedium';
+	/*margin-left:20px;
+	margin-top:10px;*/
+}
+#allCheckP{
+	margin-left:10px;
+}
+#allCheckP{
+	border-radius:50px;
+	border:1px solid gray;
+	appearance: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    width:12px;
+    height:12px;
+}
+#allCheckP:checked{
+	background:#2C394B;
+	border:none;
+}
+#noPList{
+	margin-left:10px;
+}
+#noPList{
+	border-radius:50px;
+	border:1px solid gray;
+	appearance: none;
+    cursor: pointer;
+    transition: background 0.2s;
+    width:12px;
+    height:12px;
+}
+#noPList:checked{
+	background:#2C394B;
+	border:none;
+}
+.planList{
+	width:90%;
+	/*border:1px solid navy;*/
+	margin:15px auto;
+	height:100px;
+	overflow:hidden;
+	box-shadow:0px 0px 4px gray;
+	background:rgb(255,255,255,0.6);
+}
+.planList>ul{
+	font-family: 'GmarketSansMedium';
+}
+.planList li{
+	float:left;
+}
+.planList li:nth-child(1){
+	margin-top:45px;
+	margin-left:20px;
+}
+.planList div{
+	margin-left:20px;
+	margin-top:18px;
+	border:1px solid navy;
+	width:180px;
+	padding:15px 20px;
+	text-align:center;
+}
+
+.planList li:nth-child(n+3){
+	margin:30px 15px;
+	height:40px;
+	line-height:40px;
+}
+.planList li:nth-child(3){
+	width:25%;
+	white-space:nowrap;
+	overflow: hidden;
+   	text-overflow: ellipsis;
+}
+
+#bold1{
+	font-weight:bold;
+	margin-bottom:10px;
+}
+.planReviewY:hover{
+	background:#F37321;
+}
+.planReviewY{
+	font-family: 'GmarketSansMedium';
+	width: 90px;
+	color:white;
+	height: 40px;
+	border: none;
+	background: #2C394B;
+	border-radius:5px;	
+}
+.planReviewN{
+	font-family: 'GmarketSansMedium';
+	width: 90px;
+	color:white;
+	height: 40px;
+	border: none;
+	background: gray;
+	border-radius:5px;	
+}
+.pagingDivP{
+	width:100%;
+	margin:0 auto;
+	margin-left:40%;
+	margin-top:5px;
+	margin-bottom:20px;
+}
+.pagingDivP>ul{
+	width:100%;
+	margin:0 auto;
+}
+.pagingDivP li{
+	float:left;
+	padding:10px 20px;
+}
+#chooseDelP{
+	margin-left:55px;
+}
+body>div{
+	height:100%;
+}
+#chooseDelP:hover{
+	background:#F37321;
+}
+#chooseDelP{
+	font-family: 'GmarketSansMedium';
+	width: 100px;
+	margin-left:60px;
+	color:white;
+	height: 40px;
+	border: none;
+	background: #2C394B;
+	border-radius:5px;
+	padding-top:5px;
+}
+#planChange:hover{
+	background:#F37321;
+}
+#planChange{
+	font-family: 'GmarketSansMedium';
+	width: 50px;
+	margin-left:60px;
+	color:white;
+	height: 40px;
+	border: none;
+	background: #2C394B;
+	border-radius:5px;
+}
+#acp{
+	font-family:'GmarketSansMedium';
+	margin-left:45px;
+}
+.fa-plane-circle-check{
+	color:#2747a1;
+	margin:0;
+	font-size:25px;
+}
+#PlanBtn{
+	padding: 6px 20px;
+}

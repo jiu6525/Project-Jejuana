@@ -4,15 +4,20 @@
     font-weight: normal;
     font-style: normal;
 }
+@font-face {
+    font-family: 'MBC1961GulimM';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-01@1.0/MBC1961GulimM.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
 #container_A{
+	width:100%;
     margin: 0;
 }
 header{
     width: 100%;
-    /*background-color: antiquewhite;*/
-    /*position: fixed;*/
+	background:#fffaf7;
 	top: 0;
-	/* width: 100% */
 	left: 0;
 	right: 0;
 	box-shadow: 0 0 4px black;
@@ -21,37 +26,49 @@ header{
     display: inline;
 }
 #logo{
-    width: 250px;
+    width: 220px;
 }
 #kategorie{
     float: right;
-    margin-top:18px;
+    margin-top:15px;
 }
 #kategorie>ul>li{
-    margin: 18px;
+    margin: 18px 30px 18px 18px;;
     float: left;
     list-style: none;
     text-decoration:none;
 }
+#kategorie>ul>li>a:hover{
+	color:#F37321
+}
 #kategorie>ul>li>a{
 	font-family: 'GmarketSansMedium';
     text-decoration: none;
-    color:#082032;
+    color:gray;
 }
-
 
 .dropbtn {
-margin-top: 17px;
-font-size: 16px;
-border: none;
-cursor: pointer;
-background-color: transparent;
+	margin-top: 19px;
+	font-size: 16px;
+	border: none;
+	cursor: pointer;
+	background-color: transparent;
 }
-
+.dropdown:hover{
+	color:#F37321
+}
 .dropdown {
+	font-family: 'GmarketSansMedium';
     position: relative;
     display: inline-block;
     margin-right: 20px;
+    color:gray;
+}
+.dropdown>button:hover{
+	color:#F37321
+}
+.dropdown>button{
+	color:gray;	
 }
 
 .dropdown-content {
@@ -63,12 +80,12 @@ background-color: transparent;
 }
 
 .dropdown-content a {
-    color: black;
+    color:#082032;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
 }
 
-.dropdown-content a:hover {background-color: #f1f1f1}
+.dropdown-content a:hover {background-color: #f7c7a8}
 
 .show {display:block;}

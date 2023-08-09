@@ -1,0 +1,138 @@
+html, body {
+	overflow:hidden;
+	width:100%;
+	height:100%;
+
+} 
+#screen{
+	width:100%; 
+	height:86%;
+	font-family:'GmarketSansMedium';
+}
+.section1{width:20%;height:107%;float:left;}
+.section1_1{background: #258fff;border-radius:5px; height:6%;margin-top:-40px;}
+.section1_1 button{float:left;width:20%;height:50px;float:left;float:left;text-decoration-line: none;}
+.section1_2{width:100%;height:2%;background:green;text-align:center;}
+.section1_3{width:100%;height:6%;font-size:12px;overflow: auto;background: #258fff; display: inline-block;}
+.section2{width:80%;height:98.2%;float:right;position:relative;}
+.section1_3_1{width:75%;height:90%; display: inline-block;}
+.section1_3_2{width:15%;float:right;height:100%;  display: inline-block;}
+.section1_3_2 button{height:72%;width:75%;align-items: center;border-radius:5px; border:none; margin-left:-50px; background: white}
+.section1_3_2 button img{object-fit: fill; height:55%;}
+.modal_style table{width:100%;}
+#weather {margin-left:-45px;margin-top:10px;width:109%;height:100%; text-align:center;background-color: #1890ff; color:white;display:inline-block;letter-spacing: 12px;font-size:40px;}
+#weather li {list-style-type: none;margin-right:1px;font-size:25px; font-weight: bold }
+#weather span {float:right;}
+#bkidx {position:absolute;z-index:4;margin-top:500px;}
+#testid {position:absolute;z-index:4;margin-top:500px;}
+#resultData:nth-child(odd) { background-color: #e6f1ff;}
+#resultData:nth-child(even)) { background-color: #f0f7ff;}
+.modal1{color: black;border:5px solid gray;position:absolute;margin-top:190px;z-index:4;text-decoration-line: none;}
+.radius_border{border:1px solid #919191;border-radius:5px;}   
+.custom_typecontrol {position:absolute;top:10px;right:10px;overflow:hidden;width:130px;height:30px;margin:0;padding:0;z-index:2;font-size:10px;}
+.custom_typecontrol button {display: inline-block;width:60px;height:30px;float:left;text-align:center;line-height:30px;cursor:pointer;padding:5px; }
+.custom_typecontrol .btn {background:#fff;background:linear-gradient(#fff,  #e6e6e6);width:50%; font-size:12px; margin-top:-5px; height:33px;}       
+.custom_typecontrol .btn:hover {background:#f5f5f5;background:linear-gradient(#f5f5f5,#e3e3e3);}
+.custom_typecontrol .btn:active {background:#e6e6e6;background:linear-gradient(#e6e6e6, #fff);}    
+.custom_typecontrol .selected_btn {color:#fff;background:#425470;background:linear-gradient(#425470, #5b6d8a);width:50%; font-size:12px; margin-top:-5px; height:33px;}
+.custom_typecontrol .selected_btn:hover {color:#fff;}   
+.custom_zoomcontrol {position:absolute;top:50px;right:10px;width:36px;height:60px;overflow:hidden;z-index:2;background-color:#f5f5f5;} 
+.custom_zoomcontrol span {display:block;width:36px;height:29px;text-align:center;cursor:pointer;}     
+.custom_zoomcontrol span img {width:10px;height:10px;}             
+.custom_zoomcontrol span:first-child{border-bottom:1px solid #bfbfbf;}     
+.map_wrap, .map_wrap * {margin:0;padding:0;}
+.scroll::-webkit-scrollbar {
+  display: none;
+}
+.modal_close{cursor:pointer;}
+.map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
+.map_wrap {position:absolute;width:20%;}
+#menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
+#menu_wrap {position:absolute;top:16%;left:0;bottom:5%;width:20%;height:67%;margin:88px 0px 0px 2px;padding:5px;padding-bottom:10px;overflow-y:auto;z-index: 1;font-size:12px;border-radius: 10px;}
+.bg_white {background:#fff;}
+.section1, .section1 * {font-size:15px;}
+#placesList li {list-style: none;width:100%;padding:5px;}
+#placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 80px;}
+#placesList .item span {display: block;margin-top:4px;font-weight:bold;}
+#placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+#placesList .item .info{padding:0 0 0 12px;}
+#placesList .info .gray {color:#8a8a8a;}
+#placesList .info .jibun {padding-left:26px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
+#placesList .info .tel {color:#009900;}
+#pagination {margin:10px auto;text-align: center;}
+#pagination a {display:inline-block;margin-right:10px;}
+#pagination .on {font-weight: bold; cursor: default;color:#777;}
+.wrap {position: absolute;left: 0;bottom: 40px;width: 276px;height: 300px;margin-left: -144px;text-align:right;font-size: 12px;font-family:'GmarketSansMedium';line-height: 1.5; border: 1px solid #258fff;}
+.wrap * {padding: 0;margin: 0;}
+.wrap_button button{border: none;width:88px; height:50px;font-weight: bold; background:white;border-bottom:1px solid gray;border-top:1px solid gray;border-left:1px solid gray;border-radius: 2px;color:white; text-shadow : -1px 0 gray, 0 1px gray, 1px 0 gray, 0 -1px gray}
+.desc .ellipsis {overflow: hidden;text-overflow: ellipsis;}
+.desc .jibun {font-size: 11px;color: #888;margin-top: -2px;white-space: normal;font-weight: bold;}
+.wrap .info {height: 28px;margin-bottom:5px;border-radius: 2px;margin-left:2px;overflow: hidden;background: #fff;padding:12px 12px;}
+.wrap .info:nth-child(1) {border: 0;box-shadow: 0px 0px 2px #888;}
+.info .title {margin-right:30px;height: 35px;background: white;font-size: 18px;font-weight: bold;margin-top:-8px;overflow:hidden;}
+.item {display:inline-flex;}
+.modal_wrap{display: none;width: 25%;position: absolute;top:37.8%;left: 57.2%;margin: -273px 0 0 -713px;background:#eee;z-index: 3;background-color: rgb(255,255,255,0.5);padding:10px;}
+.black_bg{display: none;position: absolute;content: ""; width: 100px;height: 100%;top:0;left: 0;z-index: 3;}
+
+#keyword{
+	height:80%;
+	font-size:18px;
+	width:90%;
+	margin-left:28px;
+	font-family:'GmarketSansMedium';
+}
+.JejuIcon{
+	float:left;
+	width:10%
+}
+#JejuIcon>img{
+	width:100%;
+	margin-top:-13px;
+	margin-left:200px;
+}
+.section1_1_1{
+	background: #258fff;
+	height:9%;
+}
+.JejuNowtemp{
+	float:right;
+	font-size:20px;
+}
+.bbtn{
+	width:2%;
+	height:4%;
+	position:absolute;
+	margin-top:77px;
+	z-index:5;
+	font-family:'GmarketSansMedium';
+	margin-left:-58px;
+	background:white;
+	border:white;
+	border-radius:4px;
+}
+.modal_thead{
+	border-bottom:1px solid gray;
+}
+.modal_thead td{
+	font-size:15px
+}
+.modal_tr{
+	border-bottom:1px solid #d3cccc;
+	text-align:center;
+}
+.modal_tr>td{
+	font-size:12px;
+}
+.delbtn{
+	margin-top:5px;
+	width:85%;
+	border:none;
+	background:#082032;
+	color:white;
+	border-radius:5px;
+	margin-bottom:5px;
+}
+.info>span{
+	font-size:13px;
+}
+/*.map_listbg{height:100%;background:url(../img/map_listbg.png);background-position:0px -10px;}*/

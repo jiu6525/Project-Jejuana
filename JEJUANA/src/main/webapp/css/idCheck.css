@@ -1,0 +1,50 @@
+header, footer{
+	display:none;
+}
+body{
+	overflow:hidden; 
+	height:230px;
+	width:550px;
+	margin: 0 auto;
+}
+.loginContainer{
+	text-align:center;
+	height:100%;
+	padding:10px;
+}
+.loginContainer>div>div>div{
+	font-family: 'GmarketSansMedium';
+	display:inline-block;
+}
+.loginContainer>div>div>p{
+	font-family: 'GmarketSansMedium';
+	display:inline-block;	
+}
+.loginContainer>div>input{
+	width: 20%;
+	height: 35px;
+	margin-top: 6px;
+	border: none;
+	background: #082032;
+	color: white;
+}
+.idCheckBox_B p{
+	font-family: 'GmarketSansMedium';
+	display:inline-block;
+}
+.idCheckBox_button{
+	font-family: 'GmarketSansMedium';
+	width: 20%;
+	height: 35px;
+	margin-top: 6px;
+	border: none;
+	background: #082032;
+	color: white;
+}
+#userid{
+	font-family: 'GmarketSansMedium';
+	height:35px;
+}
+.idCheck_img{
+	width:150px;
+}

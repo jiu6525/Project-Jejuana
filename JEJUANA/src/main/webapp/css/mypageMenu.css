@@ -1,0 +1,80 @@
+.profile{
+	padding-top:50px;		
+}
+.nickname{
+	width:70%;
+	margin-top:80px;	
+	text-align:center;
+	padding:15px 0 15px 0;
+	box-shadow:0px 0px 4px gray;
+	
+}
+.nickname>div>span{
+	font-family: 'GmarketSansMedium';
+	margin-bottom: 10px;
+	font-size:25px;
+	font-weight:700;
+}
+.nickname>div>p{
+	font-family: 'GmarketSansMedium';	
+}
+.mypage{
+	font-family: 'GmarketSansMedium';
+	text-align:center;
+	font-size:18px;
+	padding-bottom:15px;
+	border-bottom:2px solid gray;
+}
+.menu{
+	margin-top:10px;
+	width:70%;
+	box-shadow:0px 0px 4px gray;
+	padding:15px;
+}
+.mypageList{
+	margin-top:15px;
+}
+.menu li{
+	font-family: 'GmarketSansMedium';
+	margin-bottom: 10px;
+}
+#bold1>a:hover, #bold2>a:hover, #bold3>a:hover, #bold4>a:hover, #bold5>a:hover{
+	color:#F37321
+}
+#bold7:hover{
+	color:#F37321
+}
+#bold3{
+	margin-top:5px;
+}
+.aside{
+	float:left;
+	margin-left:10%;
+	width:15%;	
+}
+details summary::marker{
+	font-size:12px;
+}
+details ul li{
+	font-size:13px;
+	padding-left:10px;
+}
+a{
+	text-decoration:none;
+	color:black;
+}
+.content_s{
+	font-family: 'GmarketSansMedium';
+	padding-bottom:20px;
+	float:left;
+	/*border:1px solid gray;*/
+	box-shadow: 0 0 3px gray;
+	margin-top:80px;
+	width:65%;
+	margin-bottom:110px;
+	background:url(../img/mypageBack.png);
+	background-size:cover;
+}
+.fa-solid{
+	font-size:20px;
+}
