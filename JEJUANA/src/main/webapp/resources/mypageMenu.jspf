@@ -1,0 +1,37 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<link rel="stylesheet" href="/jejuana/css/mypageMenu.css"/>
+
+
+<div>
+	<div class="aside">
+		<div class="nickname">
+			<div>
+				<c:forEach var="proDTO" items="${proDTO }">
+					<i class="fa-solid fa-user-pen"></i>
+					<span>
+						${proDTO.nickname }
+					</span>
+					<p style="color:gray">${proDTO.id }</p>
+				</c:forEach>
+			</div>
+		</div>	
+		<div class="menu">
+			<div class="mypage">마이페이지</div>
+			<ul class="mypageList">
+				<li id="bold1"><a href="/jejuana/mypage/mypagePlan">나의 일정 관리</a></li>
+				<li id="bold2"><a href="/jejuana/mypage/mypageReview">여행기록 관리</a></li>
+				<li id="bold6">
+					<details open>
+						<summary id="bold7">북마크</summary>
+						<ul>
+							<li id="bold3"><a href="/jejuana/mypage/mypageCourse">코스</a></li>
+							<li id="bold4"><a href="/jejuana/mypage/mypagePlace">여행지</a></li>
+						</ul>
+					</details>
+				</li>
+				<li id="bold5"><a href="/jejuana/mypage/mypageUserCheck">회원정보수정</a></li>
+			</ul>
+		</div>
+	</div>
+
