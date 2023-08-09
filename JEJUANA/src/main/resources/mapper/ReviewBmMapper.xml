@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team6.jejuana.dao.ReviewBmDAO">
+	<!-- 중복 방지 위해서 데이터 존재 여부 확인 -->
+	<select id="reviewBmSelect" resultType="int">
+		select count(book_no) from bookmark where target_no=${target_no} and id=#{id}
+	</select>
+	<!-- 북마크 테이블에 저장하기 위해 글 제목 받아오기 -->
+	<select id="reviewInfoSelect" resultType="com.team6.jejuana.dto.ReviewBmDTO">
+		select review_subject as book_name from review where plan_no=${target_no}
+	</select>
+	<!-- 북마크 -->
+	<insert id="reviewBmInsert">
+		insert into bookmark(book_no, book_name, book_type, id, target_no) 
+		values(book_sq.nextval, #{book_name}, 2, #{id}, ${target_no})
+	</insert>
+</mapper>

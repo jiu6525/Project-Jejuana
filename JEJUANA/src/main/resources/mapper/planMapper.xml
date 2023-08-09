@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team6.jejuana.dao.PlanDAO">
+<insert id="planSave" parameterType="com.team6.jejuana.dto.PlanDTO">
+    <selectKey order="BEFORE" keyProperty="plan_no" resultType="int">
+        select plan_sq.nextval from dual
+    </selectKey>
+    insert into plan(plan_no, plan_name, start_date, end_date, id, days)
+    values(${plan_no}, #{plan_name}, to_date(#{start_date}), to_date(#{end_date}), #{id}, ${days})
+</insert>
+<select id="placeAllList"   resultType="com.team6.jejuana.dto.PlaceDTO">
+    select place_no, place_name, place_addr, latitude, longitude, content, rate, to_char(writedate, 'MM-DD'), id, thumbnail
+    from place order by place_no asc
+</select>
+<select id="placeSelectList"  resultType="com.team6.jejuana.dto.PlaceDTO">
+    select * from (select * from (select * from place where place_name like '%${param1}%' order by place_no asc)
+    <![CDATA[
+    where rownum <= 15*${param2} order by place_no desc)
+    ]]>
+    <![CDATA[
+    where rownum <= 15 order by place_no asc
+    ]]>
+</select>
+<select id="bookmarkList"  resultType="com.team6.jejuana.dto.PlaceDTO">
+    select * from (select * from (select p.place_no, p.place_name, p.place_addr, p.latitude, p.longitude, p.content, p.rate, to_char(p.writedate, 'MM-DD'), p.id, p.thumbnail
+    from place p join (select * from bookmark where id=#{param3}) b
+    on p.place_no=b.target_no and p.place_name like '%${param1}%')
+    <![CDATA[
+    where rownum <= 15*${param2} order by place_no desc)
+    ]]>
+    <![CDATA[
+    where rownum <= 15 order by place_no asc
+    ]]>
+
+</select>
+<select id="selectedPlace" resultType="com.team6.jejuana.dto.PlaceDTO">
+    select * from place where place_no=${param1}
+</select>
+<insert id="courseSave" parameterType="java.util.List">
+    <foreach item="dto" collection="list" open="INSERT ALL" separator=" " close="SELECT * FROM DUAL">
+        into course(plan_no, place_no, days_order, course_order)
+        values(${dto.plan_no}, ${dto.place_no}, ${dto.days_order}, ${dto.course_order})
+    </foreach>
+</insert>
+<select id="planList" resultType="com.team6.jejuana.dto.PlanDTO">
+    select plan_no, plan_name, to_char(start_date, 'YYYY-MM-DD') start_date, to_char(end_date, 'YYYY-MM-DD') end_date, days from plan where id=#{param1} order by start_date asc
+</select>
+<select id="courseSelect" resultType="com.team6.jejuana.dto.CourseDTO">
+    select place_no, days_order, course_order from course where plan_no=${param1}
+</select>
+    <update id="planUpdate" parameterType="com.team6.jejuana.dto.PlanDTO">
+        update plan set plan_name=#{plan_name}, start_date=#{start_date}, end_date=#{end_date}, days=#{days}
+        where plan_no=${plan_no}
+    </update>
+<delete id="courseDel">
+    delete from course where plan_no=${param1}
+</delete>
+   <select id="checkRate" resultType="int">
+        select count(rate) from rate where place_no=${param1}
+    </select>
+    <select id="takeRate" resultType="double">
+        select round(avg(rate), 1) from rate where place_no =${param1}
+    </select>
+</mapper>

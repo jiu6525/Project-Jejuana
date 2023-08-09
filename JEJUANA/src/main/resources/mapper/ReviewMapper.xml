@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team6.jejuana.dao.ReviewDAO">
+	<!-- 인기 게시글 목록 -->
+	<select id="reviewBestSelect" resultType="com.team6.jejuana.dto.ReviewDTO">
+		select plan_no, review_subject, id, nickname, thumbnail, tag, joayo_hit from
+		(select r.plan_no, r.review_subject, u.id, u.nickname, r.thumbnail, r.tag, r.joayo_hit from review r join common u on r.id=u.id and r.activated=0 order by r.joayo_hit desc)
+		where rownum &lt;= 10
+	</select>
+	<!-- 일반 게시글 목록 -->
+	<select id="reviewAllSelect" resultType="com.team6.jejuana.dto.ReviewDTO">
+		select r.plan_no, r.review_subject, u.id, u.nickname, r.review_hit, to_char(r.writedate, 'YYYY-MM-DD') writedate, r.thumbnail, r.tag, r.joayo_hit
+		from review r join common u on r.id=u.id
+		where activated=0
+		<if test="searchWord!=null"> <!-- 검색어 있을 경우 -->
+			and ${searchKey} like '%${searchWord}%'
+		</if>
+		order by r.writedate desc
+	</select>
+	<!-- 게시글 작성 -->
+	<select id="reviewWriteSelect" resultType="com.team6.jejuana.dto.ReviewDTO">	
+		select plan_no, plan_name, days from plan where plan_no=${param1}
+	</select>
+	<!-- 일자별 플랜 선택 -->
+	 <select id="planSelect" resultType="com.team6.jejuana.dto.ReviewDTO">
+	 select distinct c.place_no, p.place_no, p.place_name
+	 	from course c
+	 		join place p on c.place_no = p.place_no
+	 		where c.plan_no = ${plan_no}
+	 </select>
+	 <!-- 여행지 1개씩 선택 -->
+	 <select id="onePlaceSelect" resultType="com.team6.jejuana.dto.ReviewDTO">
+	 select place_no, place_name, rate, rate_count from place
+		where place_no in
+	    (select distinct place_no from course) and place_no=${place_no}
+	 </select>
+	 <!-- 별점 중복 확인 -->
+	 <select id="starSelect" resultType="int">
+		select count(rate_no) from rate where plan_no=${plan_no} and id=#{id} and place_no=${place_no}
+	</select>
+	<!-- 별점 정보 등록 -->
+	 <insert id="starInsert">
+		insert into rate(rate_no, plan_no, place_no, id, rate)
+		values(rate_sq.nextval, ${plan_no}, ${place_no}, #{id}, ${rate})
+	</insert>
+	 <!-- 별점 부여 -->
+	 <update id="starUpdate">
+	 update 
+		   (select place_no, place_name, rate, rate_count from place
+		        where place_no in
+		            (select distinct place_no from course))
+		set rate=((rate*rate_count)+${param2})/(rate_count+1), rate_count=rate_count+1
+		where place_no=${param1}
+	 </update>
+	 <!-- DB에 게시글 정보 등록 -->
+	<insert id="reviewInsert"> 
+		insert into review(plan_no, review_subject, review_content, id, ip, tag, thumbnail)
+		values(#{plan_no}, #{review_subject}, #{review_content}, #{id}, #{ip}, #{tag}, #{thumbnail})
+	</insert>
+	<!-- 해당 플랜의 course 정보 불러오기 -->
+	<select id="reviewCourse" resultType="com.team6.jejuana.dto.ReviewDTO">
+		select a.days_order, b.place_name, b.place_no, c.days 
+		from course a join place b
+		on a.place_no = b.place_no
+		join plan c on a.plan_no = c.plan_no
+		where a.plan_no=${plan_no}
+		order by a.days_order, a.course_order asc
+	</select>
+	<!-- 게시글 확인 -->
+	<select id="reviewSelect" resultType="com.team6.jejuana.dto.ReviewDTO"> 
+		select r.plan_no, r.review_subject, r.review_content, u.nickname, u.id, r.review_hit, r.tag, r.writedate, r.joayo_hit
+		from review r join common u on r.id=u.id 
+		and r.plan_no=${param1} 
+	</select>
+	<!-- 게시글 확인 시 조회 수 증가 -->
+	<update id="reviewHitCount"> 
+		update review set review_hit=review_hit+1 where plan_no=${param1}
+	</update>
+	<!-- 태그 테이블에 등록된 태그 -->
+	<select id="tagSelect" resultType="com.team6.jejuana.dto.ReviewDTO"> 
+		select tag_content from tag
+	</select>
+	<!-- 수정할 게시글 선택 -->
+	<select id="reviewEditSelect" resultType="com.team6.jejuana.dto.ReviewDTO">	
+		select plan_no, review_subject, review_content, tag from review where plan_no=${param1}
+	</select>
+	<!-- 게시글 수정 -->
+	<update id="reviewUpdate" parameterType="com.team6.jejuana.dto.ReviewDTO">
+		update review set review_subject=#{review_subject}, review_content=#{review_content}, tag=#{tag}, thumbnail=#{thumbnail}
+		where plan_no=${plan_no} and id=#{id}
+	</update>
+	<!-- 게시글 삭제 -->
+	<delete id="reviewDelete">
+		delete from review where plan_no=${plan_no} and id=#{id}
+	</delete>
+</mapper>

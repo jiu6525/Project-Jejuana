@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team6.jejuana.dao.BookMarkDAO">
+	<insert id="bookMarkInsert">
+		insert into bookmark(book_no, book_name, book_addr, book_type, id, rate)
+		values(book_seq.nextval, #{book_name}, #{book_addr}, #{book_type}, #{id}, ${rate})
+	</insert>
+	
+	<select id="bookListSelect" resultType="com.team6.jejuana.dto.BookMarkDTO">
+		select book_no, book_name,book_addr, book_date from bookmark where id=#{parma1} order by book_no
+	</select>
+	
+	<delete id="dataDelete">
+ 		delete from bookmark where book_no=${no}
+ 	</delete>
+ 	<!-- 별점추가 -->
+ 	<select id="bookmarkRate" resultType="double">
+ 		select rate from place where place_name=#{param1}
+ 	</select>
+</mapper>

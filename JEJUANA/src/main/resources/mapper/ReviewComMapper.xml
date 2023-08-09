@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team6.jejuana.dao.ReviewComDAO">
+	<!-- 댓글 등록 -->
+	<insert id="commentInsert">
+		insert into coment(comment_no, target_no, comment_content, id, ip, type)
+		values(comment_sq.nextval, #{target_no}, #{comment_content}, #{id}, #{ip}, 2)
+	</insert>
+	<!-- 댓글 목록 -->
+	<select id="commentListSelect" resultType="com.team6.jejuana.dto.ReviewComDTO">
+		select comment_no, target_no, comment_content, id, writedate
+		from coment where target_no=${param1}
+		order by comment_no desc
+	</select>
+	<!-- 댓글 수정 -->
+	<update id="commentUpdate">
+		update coment set comment_content=#{comment_content}
+		where comment_no=#{comment_no} and id=#{id}
+	</update>
+	<!-- 댓글 삭제 -->
+	<delete id="commentDelete">
+		delete from coment where comment_no=${param1} and id=#{param2}
+	</delete>
+</mapper>

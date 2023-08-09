@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team6.jejuana.dao.MypageDAO">
+	<select id="totalRecord" resultType="int">
+		select count(plan_no) totalRecord from plan where activated=0
+	</select>
+	<select id="planAllSelect" resultType="com.team6.jejuana.dto.PlanDTO">
+		select * from
+			(select * from
+				(
+					select plan_no, plan_name, to_char(start_date,'YYYY-MM-DD') start_date, to_char(end_date,'YYYY-MM-DD') end_date, id
+					from plan where activated=0 and id=#{id} order by plan_no desc	
+				)
+				<![CDATA[		
+				where rownum<=${onePageRecord*nowPage} order by plan_no asc
+				]]>
+			)
+			<choose>
+					<when test="nowPage!=totalPage">
+						<![CDATA[		
+						where rownum<=${onePageRecord} order by plan_no desc
+						]]>
+					</when>
+					<when test="nowPage==totalPage">
+						<![CDATA[		
+						where rownum<=${lastPageRecord} order by plan_no desc
+						]]>
+					</when>
+				</choose>
+	</select>
+	<select id="profileSelect" resultType="com.team6.jejuana.dto.CommonDTO">
+		select id, nickname, phone_num, name from common where id=#{param1}
+	</select>
+	<update id="mypagePlanMultiDel">
+		update plan set activated=1
+		<foreach item="item" collection="list" open="where plan_no in (" separator="," close=")">
+			#{item}		
+		</foreach>
+	</update>
+	<select id="totalRecordReview" resultType="int">
+		select count(plan_no) totalRecord from review where activated=0
+	</select>
+	<select id="reviewAllSelect" resultType="com.team6.jejuana.dto.ReviewDTO">
+		select * from
+			(select * from
+				(
+					select plan_no, review_subject, review_hit, id, to_char(writedate,'MM-DD HH24:MI') writedate
+					from review where activated=0 and id=#{id} order by plan_no desc	
+				)
+				<![CDATA[		
+				where rownum<=${onePageRecord*nowPage} order by plan_no asc
+				]]>
+			)
+			<choose>
+					<when test="nowPage!=totalPage">
+						<![CDATA[		
+						where rownum<=${onePageRecord} order by plan_no desc
+						]]>
+					</when>
+					<when test="nowPage==totalPage">
+						<![CDATA[		
+						where rownum<=${lastPageRecord} order by plan_no desc
+						]]>
+					</when>
+				</choose>
+	</select>
+	<update id="mypageReviewMultiDel">
+		update review set activated=1
+		<foreach item="item" collection="list" open="where plan_no in (" separator="," close=")">
+			#{item}		
+		</foreach>
+	</update>
+	<select id="pwdSelect" resultType="String">
+		select password from common where id=#{param1}
+	</select>
+	<select id="userEdit" resultType="com.team6.jejuana.dto.LoginDTO">
+		select email from common where id=#{param1}
+	</select>
+	<update id="userEditOk">
+		update common set password=#{password}, nickname=#{nickname}, phone_num=#{phone_num}, email=#{email}
+		where id=#{id}
+	</update>
+</mapper>

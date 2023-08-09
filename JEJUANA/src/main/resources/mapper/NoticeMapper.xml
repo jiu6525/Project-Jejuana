@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team6.jejuana.dao.NoticeDAO">
+	<select id="gonggiSelect" resultType="com.team6.jejuana.dto.NoticeDTO">
+		select n.notice_no, n.notice_subject, c.nickname, to_char(n.notice_date,'yyyy-MM-dd') notice_date, n.notice_hit, c.member_type
+		from notice n join common c on n.id=c.id where n.gonggi=1
+	</select>
+	<select id="noticeAllSelect" resultType="com.team6.jejuana.dto.NoticeDTO">
+		select * from
+			(select * from
+				(
+					select n.notice_no, n.notice_subject, to_char(n.notice_date,'YYYY-MM-DD') notice_date, n.id, n.notice_hit, n.secretKey, n.ref, n.orgId, n.lvl, c.nickname
+					from notice n join common c on n.id=c.id where gonggi=0 
+					<if test="searchWord!=null">
+						and ${searchKey} like '%${searchWord}%'
+					</if>
+					order by ref desc	
+				)
+				<![CDATA[		
+				where rownum<=${onePageRecord*nowPage} order by ref asc
+				]]>
+			)
+			<choose>
+					<when test="nowPage!=totalPage">
+						<![CDATA[		
+						where rownum<=${onePageRecord} order by ref desc
+						]]>
+					</when>
+					<when test="nowPage==totalPage">
+						<![CDATA[		
+						where rownum<=${lastPageRecord} order by ref desc
+						]]>
+					</when>
+				</choose>
+	</select>
+	<select id="totalRecord" resultType="int">
+		select count(notice_no) totalRecord from notice where gonggi=0
+		<if test="searchWord!=null">
+			and ${searchKey} like '%${searchWord}%'
+		</if>
+	</select>
+	<insert id="noticeInsert">
+		insert into notice(notice_no, notice_subject, notice_content, id, ip, secretKey, ref)
+		values(notice_sq.nextval, #{notice_subject}, #{notice_content}, #{id}, #{ip}, #{secretKey}, notice_sq.currval)
+	</insert>
+	<update id="hitCount">
+		update notice set notice_hit = notice_hit+1 where notice_no=${param1} and id!=#{param2}
+	</update>
+	<select id="noticeSelect" resultType="com.team6.jejuana.dto.NoticeDTO">
+		select n.notice_no, n.notice_subject, n.id, n.notice_content, n.notice_hit, n.notice_date, c.member_type, n.secretKey, n.ref, n.lvl 
+		from notice n join common c on n.id=c.id where notice_no=${param1}
+	</select>
+	<select id="memberTypeSelect" resultType="int">
+		select member_type from common where id=#{param1}
+	</select>
+	<update id="noticeUpdate">
+		update notice set notice_subject=#{notice_subject}, notice_content=#{notice_content}, secretKey=#{secretKey}
+		where notice_no=${notice_no} and id=#{id}
+	</update>
+	<delete id="noticeDelete">
+		delete from notice where ref=${ref}
+	</delete>
+	<delete id="applyDelete">
+		delete from notice where notice_no=${notice_no} 
+	</delete>
+	<insert id="managerInsert">
+		insert into notice(notice_no, notice_subject, notice_content, id, ip, gonggi)
+		values(notice_sq.nextval, #{notice_subject}, #{notice_content}, #{id}, #{ip}, 1)
+	</insert>
+	<select id="replyDataSelect" resultType="com.team6.jejuana.dto.NoticeDTO">
+		select ref, id from notice where notice_no=${param1}
+	</select>
+	<insert id="replyWrite">
+		insert into notice(notice_no, notice_subject, notice_content, id, ip, secretKey, ref, lvl, orgId)
+		values(notice_sq.nextval, #{notice_subject}, #{notice_content}, #{id}, #{ip}, #{secretKey}, ${ref}, 1, #{orgId})
+	</insert>
+</mapper>

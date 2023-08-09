@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="com.team6.jejuana.dao.ManagerDAO">
+ 
+ 	<select id="commontotalRecord" resultType="int">
+ 		select count(common_no) totalRecord from common
+ 		<if test="searchWord!=null">
+ 			 where ${searchKey} like '%${searchWord}%'
+ 		</if>
+ 	</select>
+ 	
+ 	
+ 	<select id="commonpageSelect" resultType="com.team6.jejuana.dto.LoginDTO">
+ 		select * from 
+		 		(select * from 
+			 		(
+					select common_no, name, id, email, nickname, to_char(sign_date,'MM-DD HH:MI') sign_date, phone_num, member_type 
+					from common 
+					<if test="searchWord!=null"><!-- 검색어가 있을 경우 -->
+		 				where ${searchKey} like '%${searchWord}%'
+		 			</if>
+		 			order by common_no desc
+		 			)
+		 		<![CDATA[
+		 			where rownum<=${onePageRecord*nowPage} order by common_no asc
+		 		]]>
+		 		)
+		 		
+			 	<choose>
+			 		<when test="nowPage!=totalPage"> 
+				 		<![CDATA[
+				 		where rownum<=${onePageRecord} order by common_no desc
+				 		]]>
+			 		</when>
+			 		<when test="nowPage==totalPage">
+			 			<![CDATA[
+				 		where rownum<=${lastPageRecord} order by common_no desc
+				 		]]>
+			 		</when>
+		 		</choose>
+		
+ 	</select>
+
+
+ 	<update id="commonMultiUpdate">
+ 		update common set member_type=mod((member_type+1),2) 
+ 		
+ 		<foreach item="item" collection="list" open="where common_no in(" separator=", " close=")">
+ 			#{item}
+ 		</foreach> 
+ 	</update>
+
+
+	<!-- 관리자 게시글 --> 	
+ 	<select id="reviewtotalRecord" resultType="int">
+ 		select count(r.plan_no) totalRecord from review r join common c on r.id=c.id
+ 		<if test="searchWord!=null">
+ 			 where ${searchKey} like '%${searchWord}%'
+ 		</if>
+ 	</select>
+ 	
+ 	
+ 	<select id="reviewpageSelect" resultType="com.team6.jejuana.dto.ReviewDTO">
+	 	select * from 
+		 		(select * from 
+			 		(
+					select r.plan_no, r.review_subject, r.id, r.review_hit, to_char(r.writedate,'MM-DD HH:MI') writedate,r.ip , r.activated 
+					from review r join common c on r.id=c.id 
+					<if test="searchWord!=null"><!-- 검색어가 있을 경우 -->
+		 				and ${searchKey} like '%${searchWord}%'
+		 			</if>
+		 			order by r.plan_no desc
+		 			)
+		 		<![CDATA[
+		 		where rownum<=${onePageRecord*nowPage} order by plan_no asc
+		 		]]>
+		 		)
+		 		
+			 	<choose>
+			 		<when test="nowPage!=totalPage"> 
+				 		<![CDATA[
+				 		where rownum<=${onePageRecord} order by plan_no desc
+				 		]]>
+			 		</when>
+			 		<when test="nowPage==totalPage">
+			 			<![CDATA[
+				 		where rownum<=${lastPageRecord} order by plan_no desc
+				 		]]>
+			 		</when>
+		 		</choose>
+
+ 	</select>
+ 	
+ 	<update id="reviewMultiUpdate">
+ 		update review set activated=mod((activated+1),2) 
+ 		
+ 		<foreach item="item" collection="list" open="where plan_no in(" separator=", " close=")">
+ 			#{item}
+ 		</foreach> 
+ 	</update>
+ 	
+ 	<select id="commonSelect" resultType="com.team6.jejuana.dto.LoginDTO">
+ 		select common_no, id, name, email, phone_num, nickname, member_type
+ 		from common where common_no=${param1}
+ 	</select>
+ 	
+ 	
+ 	<update id="commonEditOk">
+	 	update common set id=#{id}, name=#{name}, email=#{email}, nickname=#{nickname}, phone_num=#{phone_num} where common_no=#{common_no}
+	 </update>
+ </mapper>
