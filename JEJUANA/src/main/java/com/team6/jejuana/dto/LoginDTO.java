@@ -9,16 +9,17 @@ public class LoginDTO {
 	private String email1;
 	private String email2;
 	private String sign_date;
-	private String member_type;
-	
-	
+	private int member_type;
+	private String phone_num;
+	private int common_no;
 	
 	@Override
 	public String toString() {
 		return "LoginDTO [id=" + id + ", password=" + password + ", name=" + name + ", nickname=" + nickname
-				+ ", email=" + email1 + ", email2=" + email2 + ", sign_date=" + sign_date + ", member_type="
-				+ member_type + "]";
+				+ ", email=" + email + ", email1=" + email1 + ", email2=" + email2 + ", sign_date=" + sign_date
+				+ ", member_type=" + member_type + ", phone_num=" + phone_num + ", common_no=" + common_no + "]";
 	}
+	
 	public String getId() {
 		return id;
 	}
@@ -68,17 +69,29 @@ public class LoginDTO {
 		this.email2 = email2;
 	}
 	//--------------------------------------------
+	public String getPhone_num() {
+		return phone_num;
+	}
+	public void setPhone_num(String phone_num) {
+		this.phone_num = phone_num;
+	}
 	public String getSign_date() {
 		return sign_date;
 	}
 	public void setSign_date(String sign_date) {
 		this.sign_date = sign_date;
 	}
-	public String getMember_type() {
+	public int getMember_type() {
 		return member_type;
 	}
-	public void setMember_type(String member_type) {
+	public void setMember_type(int member_type) {
 		this.member_type = member_type;
+	}
+	public int getCommon_no() {
+		return common_no;
+	}
+	public void setCommon_no(int common_no) {
+		this.common_no = common_no;
 	}
 	
 }
