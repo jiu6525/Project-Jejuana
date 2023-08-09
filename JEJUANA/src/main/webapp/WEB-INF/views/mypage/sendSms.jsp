@@ -10,7 +10,7 @@
 <div class="sendSms_container">
 	
 	<h1 class="sms_h1">휴대폰인증</h1>
- 	<img src="img/sendSms_img.png">
+ 	<img src="../img/sendSms_img.png">
     <form method="post" action="smssend" class="sendSms_form">
         <table class="sendSms_table1">
             <tr class="form-group">

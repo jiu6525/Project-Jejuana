@@ -39,9 +39,9 @@
 		<jsp-property-group>
 			<url-pattern>/WEB-INF/views/*</url-pattern>
 			<include-prelude>/resources/header.jspf</include-prelude>
-			
+			<include-coda>/resources/footer.jspf</include-coda>
 		</jsp-property-group>
-	</jsp-config> 
+	</jsp-config>
 	
 	<!-- POST방식 접속에 대한 한글 인코딩(UTF-8) -->
 	<filter>

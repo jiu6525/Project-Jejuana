@@ -1,421 +1,178 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<style>
-	body{
-		overflow:hidden; 
-		height:100%;
-	}
-	.join_leftBox, .join_centerBox, .join_rightBox{
-		float:left;
-		height:839px;
-		margin:0px;
-	}
-	.join_leftBox{
-		display:flex;
-		width:40%;
-		height:850px;
-		align-items:center;
-		justify-content:center;
-	}
-	.join_leftBox>img{
-		width:80%;
-		height:80%;
-	}
-	.join_centerBox{
-		display:flex;
-		width:60%;
-		height:850px;
-		align-items:center;
-		justify-content:center;
-		/*background:#ddd;*/	
-	}
-	#joinForm{
-		height:80%;
-	}
- 	.join_inputBox{
-	 	display:inline-block;
-	 	width:100%;
-	 }
-	 .join_inputBox>div{
-	 	width:100%;
-	 	float:left;
-	 	margin-left:14px;
-	 	margin-bottom:20px;
-	 }
-	 .join_inputBox p{
-	 	display:inline-block;
-	 	width:20%;
-	 	border:1px solid #aaaaaa;
-	 	text-align:center;
-	 	padding:6px;	
-	 	
-	 }
-	 .join_inputBox>div>div>p{
-	 	display:inline-block;
-	 	width:20%;
-	 	border:1px solid #aaaaaa;
-	 	text-align:center;
-	 	float:left;
-	 	padding:6px;	
-	 }
-	 
-	 .join_inputBox input{
-	 	font-size:12px;
-	 	padding:6px;
-	 	height:31px;
-	 	width:188px;
-	 }
-	 .idBox{
-	 	width:62px
-	 }
-	 #userpwd, #addr{
-	 	margin-bottom:20px;
-	 }
-	.leftBox{
-		width:45%;
-		display:inline-block;
-		float:left;
-	}
-	 .left>div{
-	 	display:inline-block;
-	 }
-	  .subBox5{
-	 	width:53px;
-	 	float:left;
-	 	border:1px solid #aaaaaa;
-	 	text-align:center;
-	 	padding:6px;
-		margin-right:5px;
-	 }
-	 .privacy{
-	 	float:left;
-	 }
-	 .privacy>div{
- 		/*display:inline-block;*/
-	 }
-	 .selectBox1{
-	 	width:100px;
-	 	padding:1px;
-	 	padding-bottom:5px;
-	 }
-	 .selectBox2{
-	 	width:60px;
-	 	padding:1px;
-	 	padding-bottom:5px;
-	 }
-	
-	 
-	 /*	개인정보 모달 */
-     .modal_wrap{
-        display: none;
-        width: 80%;
-        height: 780px;
-        max-height: calc(100vh - 200px);
-        overflow-y: auto;
-        position: absolute;
-        top:35%;
-        left: 24%;
-        margin: -250px 0 0 -250px;
-        background:#eee;
-        z-index: 2;
- 		padding:30px;
-    }
-    .black_bg{
-        display: none;
-        position: absolute;
-        content: "";
-        width: 100%;
-        height: 100%;
-        background-color:rgba(0, 0,0, 0.5);
-        top:0;
-        left: 0;
-        z-index: 1;
-       
-    }
-    
-    .modal_close{
-    	display:inline-block;
-        width: 120px;
-        height: 40px;
-        line-height:40px;
-    }
-    .modal_close> a:hover{
-    	background:#F37321;
-    }
-    .modal_close> a{
-        display: block;
-        width: 100%;
-        height: 100%;
-        background:#123456;
-        /*text-indent: -9999px;*/
-        text-decoration-line:none;
-        color:white;
-        text-align:center;
-        font-weight:bold;
-    }
-    .modal_close2{
-    	display:inline-block;
-        width: 120px;
-        height: 40px;
-        
-    }
-    .modal_close2> a{
-        /*display: block;
-        width: 100%;
-        height: 100%;*/
-        padding:10px;
-        background:#123456;
-        /*text-indent: -9999px;*/
-        text-decoration-line:none;
-        color:white;
-        text-align:center;
-        font-weight:bold;
-        
-    }
-    #modal_btn:hover{
-    	color:#082032;
-    	font-weight:bold;
-    }
-    #modal_btn{
-    	display:inline-block;
-    	cursor:pointer;
-    	transition:background 0.5s ease-in-out;
-    }
-    .font{
-    	font-family: 'GmarketSansMedium';
-    	font-size:15px;
-    }
-    .font>p{
-    	margin: 6px 0 6px 0;
-    }
-	h2 {
-    	font-size: 24px;
-    }
-    table th {
-        font-size: 8px;
-        text-align: left;
-        /* vertical-align: top; */
-        padding: 10px;
-        font-weight: normal;
-        background-color: #efefef;
-        border-collapse: collapse;
-        border: 1px solid #e8e8e8;
-    }
-    table td {
-        font-size: 8px;
-        text-align: left;
-        /* vertical-align: top; */
-        padding: 10px;
-        opacity: 0.5;
-        border-collapse: collapse;
-        border: 1px solid #e8e8e8;
-    }
-
-    @media (max-width: 600px) {
-	    p {
-	        font-size: 12px;
-	    }
-	    ol,
-	    li {
-	        color: #9e9e9e !important;
-	        font-size: 10px;
-	    }
-	
-	    h1 {
-	        font-size: 22px;
-	    }
-	
-	    h2 {
-	        font-size: 18px;
-	    }
-	    .contents {
-	        font-size: 11px;
-	        color: #616161 !important;
-	    }
-    }
-
-</style>
-
+<link rel="stylesheet" href="/jejuana/css/join.css"/>
 <script>
-	//변수
-	var ojId = document.getElementById("id");
-	var ojPwd = document.getElementById("password");
-	var ojPwd2 = document.getElementById("password2");
-	var ojUsername = document.getElementById("username");
-	var ojUsernickname = document.getElementById("usernickname");
-	var ojEmail = document.getElementById("email");
-	var ojEmail2 = document.getElementById("email2");
-	var ojTel = document.getElementById("tel");
-	var ojTelnum = document.getElementById("telNum");
-	var ojInformation = document.getElementById("information");
+//변수
+let ojId;
+let ojPwd;
+let ojPwd2;
+let ojUsername;
+let ojUsernickname;
+let ojphone_num;
+let ojEmail;
+let ojEmail2;
+let ojInformation;
+//아이디 조건변수
+let idCondition = /^[a-z0-9_]{5,20}$/
+//비밀번호 조건변수
+let pwdCondition = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/
+//닉네임 조건변수
+let nickCondition = /^[ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9]{2,10}$/
+//이메일 @앞부분 조건변수
+let emailCondition = /^[a-zA-Z0-9._%+-]+$/
+//이메일 @뒷부분 조건변수
+let emailCondition2 = /^[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+//휴대폰 조건변수
+let telCondition = /^01(0|1|6|7|8|9)[0-9]{7,8}/
+$(function(){
+	ojId = document.getElementById("id");
+	ojPwd = document.getElementById("password");
+	ojPwd2 = document.getElementById("password2");
+	ojUsername = document.getElementById("username");
+	ojUsernickname = document.getElementById("usernickname");
+	ojphone_num = document.getElementById("phone_num");
+	ojEmail = document.getElementById("email");
+	ojEmail2 = document.getElementById("email2");
+	ojInformation = document.getElementById("information");
 	
-	//아이디 조건변수
-	var idCondition = /^[a-z0-9_]{5,20}$/
-	//비밀번호 조건변수
-	var pwdCondition = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()-_=+[\]{};:'",.<>/?])[a-zA-Z!@#$%^&*()-_=+[\]{};:'",.<>/?]+$/
-	//닉네임 조건변수
-	var nickCondition = /^[ㄱ-ㅎㅏ-ㅣ가-힣a-zA-Z0-9]{2,10}$/
-	//이메일 조건변수
-	var emailCondition = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
-	//휴대폰 조건변수
-	var telCondition = /^01[016789][1-9]\d{6,7}$/
-	
-	$(function(){
-		//아이디 중복검사
-		$("input[value=중복검사]").click(function(){
-			//아이디 검사
-			if($("#id").val()!=""){
-				if( !idCondition.test($("#id").val()) ){
-					alert("아이디는 5~20자의 영소문자,숫자와 특수문자(_)만 사용가능 합니다.");
-					ojId.focus();
-					return false;			
-				}else{
-					//모달로 변경필요
-					window.open("idCheck?id="+$("#id").val(),"chk","width=550,height=230");
-				}
+	//아이디 중복검사
+	$("input[value=중복검사]").click(function(){
+		//아이디 검사
+		if($("#id").val()!=""){
+			if( !idCondition.test($("#id").val()) ){
+				alert("아이디는 5~20자의 영소문자,숫자와 특수문자(_)만 사용가능 합니다.");
+				ojId.focus();
+				return false;			
 			}else{
-				alert("아이디를 입력 후 중복검사하세요.");
-				ojId.focus();
-				return false;
-			}	
-		});
-		
-		//아이디 중복검사
-		$("input[value=휴대폰인증받기]").click(function(){
-			//아이디 검사
-			if($("#id").val()!=""){
-				if( !idCondition.test($("#id").val()) ){
-					alert("아이디는 5~20자의 영소문자,숫자와 특수문자(_)만 사용가능 합니다.");
-					ojId.focus();
-					return false;			
-				}else{
-					//모달로 변경필요
-					window.open("idCheck?id="+$("#id").val(),"chk","width=550,height=230");
-				}
-			}else{
-				alert("아이디를 입력 후 중복검사하세요.");
-				ojId.focus();
-				return false;
-			}	
-		});
-		
-		//휴대폰인증
-		$("#").keyup(function(){
-			$("#").val("N");
-		});
-		
-		//select박스 설정
-		var idval = $('#email2');
-		$("#email2_box").change(function(){
-			var element = $(this).find('option:selected');
-			var emailTag = element.attr('value');
-			idval.val(emailTag);
-		});
-		
-		
-		
-		//유효성 검사
-		$("#joinForm").submit(function(){
-			event.preventDefault();
-			
-			//아이디
-			if($("#id").val()==""){
-				alert("아이디를 입력하세요.");
-				ojId.focus();
-				return false;
-			};
-	
-			//비밀번호
-			if($("#password").val()==""){
-				alert("비밀번호를 입력하세요.");
-				ojPwd.focus();
-				return false;
+				//팝업
+				window.open("idCheck?id="+$("#id").val(),"chk","width=550,height=230");
 			}
-			//비밀번호 검사
-			if(!pwdCondition.test($("#password").val())){
-				alert("비밀번호는 영대소문자, 특수기호 필수포함, 연속되는 숫자 사용금지, 공백문자가 포함되지 않게 사용가능합니다.");
-				ojPwd.focus();
-				return false;
-			}
-			//비밀번호 확인
-			if($("#password2").val()==""){
-				alert("비밀번호를 입력하세요.");
-				ojPwd2.focus();
-				return false;
-			}
-			//이름
-			if($("#username").val()==""){
-				alert("이름은 ");
-				ojUsername.focus();
-				return false;
-			}
-			//닉네임
-			if($("#usernickname").val()==""){
-				alert("닉네임을 입력하세요.");
-				ojUsernickname.focus();
-				return false;
-			}
-			//닉네임 검사
-			if(!nickCondition.test($("#nickname").val())){
-				alert("닉네임은 영대소문자, 특수기호 필수포함, 연속되는 숫자 사용금지, 공백문자 불가의 조건으로 생성가능합니다.");
-				ojUsernickname.focus();
-				return false;
-			}
-			//이메일
-			if($("#email").val()==""){
-				alert("이메일을 입력하세요.");
-				ojEmail.focus();
-				return false;
-			}
-			//이메일 검사
-			if(!emailCondition.test($("#email").val())){
-				alert("올바른 이메일을 입력해주세요.");
-				ojEmail.focus();
-				return false;
-			}
-			//도메인
-			if($("#email2").val()==""){
-				alert("도메인을 입력하거나 선택해주세요.");
-				ojEmail2.focus();
-				return false;
-			}
-			//휴대폰
-			if($("#tel").val()==""){
-				alert("휴대폰번호를 입력하세요.");
-				ojTel.focus();
-				return false;
-			}
-			//휴대폰 검사
-			if(!telCondition.test($("#tel").val())){
-				alert("올바른 휴대폰 번호를 입력하세요.");
-				ojTel.focus();
-				return false;
-			}
-			//인증번호
-			if($("#telNum").val()==""){
-				alert("인증번호를 입력하세요.");
-				ojTelnum.focus();
-				return false;
-			}
-			//개인정보동의 체크박스
-			if( !$("input[name='information']").attr('checked') ){
-				alert("개인정보를 동의하셔야 회원가입 가능합니다.");
-				ojInformation.focus();
-				return false;
-			}
-			
-			//form 태그
-			$("#joinForm").attr("action","joinOk");
-			return true;
-
-		});
-		
+		}else{
+			alert("아이디를 입력 후 중복검사하세요.");
+			ojId.focus();
+			return false;
+		}	
 	});
+	
+	//휴대폰 인증 팝업
+	$("input[value=휴대폰인증]").click(function(){
+		
+		var popupWidth = 650;
+		var popupHeight = 800;
+		var popupX = (document.body.offsetWidth / 2) - (550 / 2);
+		var popupY= (document.body.offsetheight / 2) - (800 / 2);
+		window.open('sendSms', 'chkSms', 'status=no, height=' + popupHeight  + ', width=' + popupWidth  + ', left='+ popupX + ', top='+ popupY);
+		
+		this.value='휴대폰인증완료';
+		this.style.backgroundColor = "#082032";
+		this.style.border = "1px solid gray";
+		this.style.color = "white";
+	});
+	
+			
+	//select박스 설정
+	var idval = $('#email2');
+	$("#email2_box").change(function(){
+		var element = $(this).find('option:selected');
+		var emailTag = element.attr('value');
+		idval.val(emailTag);
+	});
+	
+});
+function joinform_check(){
+	//유효성 검사
+		//아이디
+		if($("#id").val()==""){
+			alert("아이디를 입력하세요.");
+			ojId.focus();
+			return false;
+		};
+		//비밀번호
+		if($("#password").val()==""){
+			alert("비밀번호를 입력하세요.");
+			ojPwd.focus();
+			return false;
+		}
+		//비밀번호 검사
+		if(!pwdCondition.test($("#password").val())){
+			alert("비밀번호는 영대소문자, 특수기호 필수포함, 연속되는 숫자 사용금지, 공백문자가 포함되지 않게 사용가능합니다.");
+			ojPwd.focus();
+			return false;
+		}
+		//비밀번호 확인
+		if($("#password2").val()==""){
+			alert("비밀번호를 입력하세요.");
+			ojPwd2.focus();
+			return false;
+		}
+		
+		//이름
+		if($("#name").val()==""){
+			alert("이름을 입력하세요.");
+			ojUsername.focus();
+			return false;
+		}
+		//닉네임
+		if($("#nickname").val()==""){
+			alert("닉네임을 입력하세요.");
+			ojUsernickname.focus();
+			return false;
+		}
+		//닉네임 검사
+		if(!nickCondition.test($("#nickname").val())){
+			alert("특수기호, 공백문자 사용불가(_-포함), 2~10자의 영문자,숫자,한글 사용가능합니다.");
+			ojUsernickname.focus();
+			return false;
+		}
+		//이메일
+		if($("#email1").val()==""){
+			alert("이메일을 입력하세요.");
+			ojEmail.focus();
+			return false;
+		}
+		//이메일 검사
+		if(!emailCondition.test($("#email1").val())){
+			alert("올바른 이메일을 입력해주세요.");
+			ojEmail.focus();
+			return false;
+		}
+		//도메인
+		if($("#email2").val()==""){
+			alert("도메인을 입력하거나 선택해주세요.");
+			ojEmail2.focus();
+			return false;
+		}
+		//도메인 검사
+		if(!emailCondition2.test($("#email2").val())){
+			alert("올바른 도메인을 입력해주세요.");
+			ojEmail2.focus();
+			return false;
+		}
+		
+		//휴대폰 번호 확인
+		if($("#phone_num").val()==""){
+			alert("휴대폰번호를 입력하세요.");
+			return false;
+		}
+		
+		if(!telCondition.test($("#phone_num").val())){
+			alert("-을 제외하고 입력해주세요");
+			return false;
+		}
+		
+		//개인정보동의 체크박스
+		if( !$("input[name='information']").is(':checked') ){
+			alert("개인정보를 동의하셔야 회원가입 가능합니다.");
+			return false;
+		}
+		
+		return true;
+	
+}
 </script>
 
 
 <div class="join_container">
-
 
 		<div>
 			<div class="join_leftBox">
@@ -423,7 +180,7 @@
 			</div>
 			<div class="join_centerBox">
 			
-				<form method="post" id="joinForm">
+				<form method="post" id="joinForm" action="joinOk" onsubmit="return joinform_check()">
 					<div>
 						<div class="join_inputBox">
 						
@@ -439,28 +196,28 @@
 							<!-- 비밀번호 -->
 							<div>
 								<p>비밀번호</p>
-								<input type="password" name="password" id="password" minlength="12" maxlength="20" placeholder="비밀번호를 입력해주세요.">
-								<span style="font-size:15px;display:block; margin:10px 0 10px 5px;">비밀번호는 12~20자의 영대소문자, 특수기호必로 사용하고, 연속되는 숫자,공백문자는 사용 불가합니다.</span>
+								<input type="password" name="password" id="password" minlength="8" maxlength="20" placeholder="비밀번호를 입력해주세요.">
+								<span style="font-size:15px;display:block; margin:10px 0 10px 5px;">비밀번호는 8~20자의 영대소문자, 특수기호必로 사용하고, 연속되는 숫자,공백문자는 사용 불가합니다.</span>
 								<p>비밀번호 확인</p>
-								<input type="password" name="password2" id="password2" minlength="12" maxlength="20" placeholder="비밀번호를 입력해주세요."><br>							
+								<input type="password" name="password2" id="password2" minlength="8" maxlength="20" placeholder="동일비밀번호를 입력해주세요."><br>							
 							</div>
 							
 							<!-- 이름 -->
 							<div>
 								<p>이름</p>
-								<input type="text" name="username" id="username" minlength="2" maxlength="10" placeholder="예) 홍길동"><br>
+								<input type="text" name="name" id="name" minlength="2" maxlength="10" placeholder="예) 홍길동"><br>
 							</div>
 							
 							<!-- 닉네임 -->
 							<div>
 								<p>닉네임</p>
-								<input type="text" name="usernickname" id="usernickname" minlength="2" maxlength="10" placeholder="닉네임을 입력해주세요."><br>
+								<input type="text" name="nickname" id="nickname" minlength="2" maxlength="10" placeholder="닉네임을 입력해주세요."><br>
 							</div>
 							
-							<!-- 이메일 -->
+							<!-- 이메일 --> 
 							<div>
 								<p>이메일</p>
-								<input type="text" name="email" id="email" placeholder="ex) jejuana"> @
+								<input type="text" name="email1" id="email1" placeholder="ex) jejuana"> @
 								<input type="text" name="email2" id="email2" placeholder="직접입력">
 								<select class="selectBox1" name="email2_box" id="email2_box">
 									<option value='naver.com'>naver.com</option>
@@ -472,7 +229,8 @@
 							
 							<!-- 휴대전화 -->
 							<div>
-								<input type="button" name="telNumGet" id="telNumGet" value="휴대폰인증받기" onClick="location.href='sendSms'">
+								<input type="text" name="phone_num" id="phone_num" placeholder="-을 제외하고 입력해주세요.">
+								<input type="button" value="휴대폰인증">
 							</div>
 							
 							<div class="privacy">
@@ -785,7 +543,7 @@
 						                <br />연락처 : admin@jejuana.co.kr
 						                <br />
 						                <br />• 개인정보 보호 담당부서 <br />부서명 : 개발팀
-						                <br />담당자 : 현준혁 <br />연락처 : admin@jejuana.co.kr
+						                <br />담당자 : 홍길동 <br />연락처 : admin@jejuana.co.kr
 						                <br />
 						                <br />■ 정보주체께서는 "회사"의 서비스('myro.co.kr, myro app',
 						                또는 사업)을 이용하시면서 발생한 모든 개인정보 보호 관련 문의,
@@ -818,6 +576,7 @@
 								    <!-- 개인정보 처리방침 -->
 								    <div class="modal_close" onclick="information_true()"><a href="#">동의합니다.</a></div>
 								    <div class="modal_close2" onclick="information_false()"><a href="#">취소</a></div>
+								    
 								</div>
 							</div>
 							
@@ -825,7 +584,11 @@
 								<input type="submit" name="joinBtn" id="joinBtn" value="회원가입">
 							</div>
 							
-					</form>
+						</div>
+						
+					</div>
+					
+				</form>
 
 			</div>
 			
@@ -861,10 +624,4 @@
 	function information_false(){
 		$('[name=information]').prop('checked', false);		
 	}
-	
-
 </script>
-	
-
-</body>
-</html>

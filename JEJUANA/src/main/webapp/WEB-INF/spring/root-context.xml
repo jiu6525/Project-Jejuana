@@ -18,7 +18,7 @@
 	<bean id="SqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="configLocation" value="classpath:mybatis-config.xml"></property>
-		<property name="mapperLocations" value="classpath:/mapper/*Mapper.xml" ></property>
+		<property name="mapperLocations" value="classpath:/mapper/*.xml" ></property>
 	</bean>
 	
 	<!-- 트랜잭션처리를 하는 마이바티스 객체를 생성 -->
@@ -26,8 +26,6 @@
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
 	
-	
-	
 	<mybatis-spring:scan base-package="com.team6.jejuana.dao"/>
-	
+		
 </beans>
