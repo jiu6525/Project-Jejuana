@@ -2,6 +2,7 @@ package com.team6.jejuana.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URISyntaxException;
+import java.nio.charset.Charset;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
@@ -9,6 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,8 +27,10 @@ import org.springframework.web.servlet.ModelAndView;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.team6.jejuana.dto.LoginDTO;
 import com.team6.jejuana.dto.MessageDTO;
+import com.team6.jejuana.dto.PagingDTO;
 import com.team6.jejuana.dto.SmsResponseDTO;
 import com.team6.jejuana.service.LoginService;
+import com.team6.jejuana.service.ManagerService;
 import com.team6.jejuana.service.SmsService;
 
 import lombok.RequiredArgsConstructor;
@@ -35,7 +42,10 @@ public class LoginController {
 	@Autowired
 	LoginService service;
 	
-	//·Î±×ÀÎ Æû
+	@Autowired
+    ManagerService mservice;
+	
+	//ë¡œê·¸ì¸í˜ì´ì§€ ì´ë™      
 	@GetMapping("/login")
 	public ModelAndView login() {
 		ModelAndView mav = new ModelAndView();
@@ -43,7 +53,7 @@ public class LoginController {
 		return mav;
 	}
 	
-	//È¸¿ø°¡ÀÔ Æû
+	//íšŒì›ê°€ì… í˜ì´ì§€ ì´ë™        
 	@GetMapping("/join")
 	public ModelAndView join() {
 		ModelAndView mav = new ModelAndView();
@@ -51,7 +61,21 @@ public class LoginController {
 		return mav;
 	}
 	
-	//°³ÀÎÁ¤º¸ µ¿ÀÇ Æû
+	@GetMapping("/findId")
+	public ModelAndView findId() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("login/findId");
+		return mav;
+	}
+	
+	@GetMapping("/findPwd")
+	public ModelAndView findPwd() {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("login/findPwd");
+		return mav;
+	}
+	
+	//                
 	@GetMapping("/information")
 	public ModelAndView information() {
 		ModelAndView mav = new ModelAndView();
@@ -59,24 +83,39 @@ public class LoginController {
 		return mav;
 	}
 	
-	//·Î±×ÀÎ(DB)
+	//ë¡œê·¸ì¸ (DB)
 	@PostMapping("/loginOk")
-	public ModelAndView loginOk(String id, String password, HttpServletRequest request, HttpSession session) {
+	public ModelAndView loginOk(String id, String password, HttpServletRequest request, HttpSession session,PagingDTO vo) {
 		LoginDTO dto = service.loginOk(id, password);
 		ModelAndView mav = new ModelAndView();
 		
-		if(dto!=null) {//·Î±×ÀÎ ¼º°ø
+		if(dto!=null) {        
 			session.setAttribute("loginId", dto.getId());
 			session.setAttribute("loginPassword", dto.getPassword());
 			session.setAttribute("loginStatus", "Y");
-			mav.setViewName("redirect:/");
-		}else {//·Î±×ÀÎ ½ÇÆĞ
+			session.setAttribute("nickname", dto.getNickname());
+			
+			//System.out.println(dto.toString());
+			if(dto.getMember_type()==1) {
+				//System.out.println("qwer");
+				mav.setViewName("redirect:manager/commonmanager1");
+				vo.setTotalRecord(mservice.commontotalRecord(vo));
+				mav.addObject("list",mservice.commonpageSelect(vo));
+				mav.addObject("nowpage",vo.getNowPage());
+				mav.addObject("vo",vo);
+				
+			}else {
+				mav.setViewName("login/loginOkResult");
+			}
+			
+		}else {        
 			mav.setViewName("redirect:login");
 		}
+		
 		return mav;		
 	}
 	
-	// ·Î±×¾Æ¿ô - ¼¼¼ÇÁ¦°Å
+	//ë¡œê·¸ì•„ì›ƒ        
 	@RequestMapping("/logout")
 	public ModelAndView logout(HttpSession session) {
 		session.invalidate();
@@ -85,7 +124,7 @@ public class LoginController {
 		return mav;
 	}
 	
-	//¾ÆÀÌµğ Áßº¹°Ë»ç
+	//ì•„ì´ë”” ì¤‘ë³µ
 	@GetMapping("/idCheck")
 	public String idCheck(String id, Model model) {
 		int result = service.idCheckCount(id);
@@ -95,8 +134,23 @@ public class LoginController {
 		
 		return "login/idCheck";
 	}
+	//íšŒì›ê°€ì…
+	@RequestMapping(value="/joinOk", method=RequestMethod.POST)
+	public ModelAndView joinOk(LoginDTO dto) {
+		ModelAndView mav = new ModelAndView();
+		
+		int result = service.loginInsert(dto);
+		
+		if(result>0) {//íšŒì›ê°€ì… ì„±ê³µì‹œ ë¡œê·¸ì¸í˜ì´ì§€ì´ë™
+			mav.addObject("msg","íšŒì›ê°€ì…ì— ì„±ê³µí–ˆìŠµë‹ˆë‹¤. ë¡œê·¸ì¸ í˜ì´ì§€ë¡œ ì´ë™í•©ë‹ˆë‹¤.");
+			mav.setViewName("redirect:login");
+		}else {//íšŒì›ê°€ì… ì‹¤íŒ¨ ì‹œ ë¡œê·¸ì¸ í¼ìœ¼ë¡œ ì´ë™+ë©”ì„¸ì§€
+			mav.setViewName("login/join");
+		}
+		return mav;
+	}
 	//==================================================================
-	//ÈŞ´ëÆùÀÎÁõ
+	// íœ´ëŒ€í° ì¸ì¦    
 	private final SmsService smsService;
 	@GetMapping("/sendSms")
 	public ModelAndView test() {
@@ -108,7 +162,6 @@ public class LoginController {
 	
 	@PostMapping("/smssend")
 	public ModelAndView sendSms(MessageDTO messageDto, Model model, HttpSession session) throws JsonProcessingException, RestClientException, URISyntaxException, InvalidKeyException, NoSuchAlgorithmException, UnsupportedEncodingException {
-		System.out.println("°ÅÀÇ ´ÙµÊ");
 		ModelAndView mav = new ModelAndView();
 		SmsResponseDTO response = smsService.sendSms(messageDto);
 		model.addAttribute("response", response);
@@ -123,19 +176,65 @@ public class LoginController {
 
 	//==================================================================
 	
-	//È¸¿ø°¡ÀÔ
-	@RequestMapping(value="/joinOk", method=RequestMethod.POST)
-	public ModelAndView joinOk(LoginDTO dto) {
+	//ì•„ì´ë”” ì°¾ê¸° ê²°ê³¼
+	@PostMapping("/findIdResult")
+	public ModelAndView findIdResult(String name, String phone_num) {
 		ModelAndView mav = new ModelAndView();
+			
+		String userid = service.idSelect(name, phone_num);
+		System.out.println(userid);
 		
-		int result = service.loginInsert(dto);
-		
-		if(result>0) {//È¸¿ø°¡ÀÔ ¼º°ø½Ã ·Î±×ÀÎÆäÀÌÁöÀÌµ¿
-			mav.addObject("msg","È¸¿ø°¡ÀÔ¿¡ ¼º°øÇß½À´Ï´Ù. ·Î±×ÀÎ ÆäÀÌÁö·Î ÀÌµ¿ÇÕ´Ï´Ù.");
-			mav.setViewName("redirect:login");
-		}else {//È¸¿ø°¡ÀÔ ½ÇÆĞ ½Ã ·Î±×ÀÎ ÆûÀ¸·Î ÀÌµ¿+¸Ş¼¼Áö
-			mav.setViewName("login/join");
+		if(userid == null || userid.equals("")) {
+			mav.addObject("result", 0);
+		}else {
+			mav.addObject("result", 1);
+			mav.addObject("userid", userid);
 		}
+		mav.setViewName("login/findIdResult");
 		return mav;
+	}
+		
+	//ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° ê²°ê³¼
+	@PostMapping("/findPwdResult")
+	public ModelAndView findPwdResult(String name, String id, String phone_num) {
+		ModelAndView mav = new ModelAndView();
+			
+		try{
+			LoginDTO dto = service.idCount(name, id, phone_num);
+			String userid = dto.getId();
+			
+			mav.addObject("result", 1);
+			mav.addObject("dto", dto);
+		}catch(Exception e) {
+			mav.addObject("result", 0);
+		}
+		mav.setViewName("login/findPwdResult");
+		return mav;
+	}
+		
+	//ë¹„ë°€ë²ˆí˜¸ ë³€ê²½
+	@PostMapping("/pwdEditOk")
+	public ResponseEntity<String> pwdEditOk(LoginDTO dto){
+		String htmlTag = "<script>";
+		
+		try {
+			service.pwdUpdate(dto);
+			htmlTag += "alert('ë¹„ë°€ë²ˆí˜¸ê°€ ë³€ê²½ë˜ì—ˆìŠµë‹ˆë‹¤');";
+			htmlTag += "location.href='login/login';";
+				
+		}catch(Exception e) {
+			e.printStackTrace();
+			htmlTag += "alert('ë¹„ë°€ë²ˆí˜¸ ë³€ê²½ì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤');";
+			htmlTag += "history.back();";
+		}
+		htmlTag += "</script>";
+			
+		HttpHeaders headers = new HttpHeaders();
+		headers.setContentType(new MediaType("text", "html", Charset.forName("UTF-8")));
+		headers.add("Content-Type", "text/html; charset=UTF-8");
+			
+		//                                
+		return new ResponseEntity<String>(htmlTag, headers, HttpStatus.OK);
+
 	}
 }
